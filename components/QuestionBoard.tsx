@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   question:{
     fontSize: 18,
     color: "#000",
-    fontWeight: "500"
+    fontWeight: "300"
   },
   numberContainer:{
     backgroundColor: "#fff",
