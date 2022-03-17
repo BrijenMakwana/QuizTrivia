@@ -1,4 +1,5 @@
 import { SafeAreaView, StyleSheet } from 'react-native';
+import AnswerBlock from '../components/AnswerBlock';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import QuestionBoard from '../components/QuestionBoard';
@@ -9,6 +10,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
   return (
     <SafeAreaView style={styles.container}>
       <QuestionBoard/>
+      <AnswerBlock/>
     </SafeAreaView>
   );
 }
