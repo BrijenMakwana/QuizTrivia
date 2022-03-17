@@ -1,10 +1,21 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
 
-const AnswerItem = () => {
+export type AnswerItemProps = {
+  title: string;
+  currectAnswer: string;
+  onNext: () => void;
+}
+
+const AnswerItem = (props: AnswerItemProps) => {
+
+  const revealAnswer = () => {
+    alert(`${props.title === props.currectAnswer}`);
+    props.onNext()
+  }
   return (
-    <Pressable style={styles.container}>
-      <Text style={styles.title}>Harry Potter</Text>
+    <Pressable style={styles.container} onPress={revealAnswer}>
+      <Text style={styles.title}>{props.title}</Text>
     </Pressable>
   )
 }

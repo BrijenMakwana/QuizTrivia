@@ -1,14 +1,33 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import AnswerItem from './AnswerItem'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import AnswerItem from './AnswerItem';
 
-const AnswerBlock = () => {
+export type AnswerBlockProps = {
+  triviaData:{
+    correct_answer: string;
+    incorrect_answers:[string];
+  }
+  onNext: () => void;
+}
+const AnswerBlock = (props: AnswerBlockProps) => {
+
   return (
     <View style={styles.container}>
-      <AnswerItem/>
-      <AnswerItem/>
-      <AnswerItem/>
-      <AnswerItem/>
+      {
+        props.triviaData.incorrect_answers.map((item,index)=>(
+          <AnswerItem 
+            title={item} 
+            key={index} 
+            currectAnswer={props.triviaData.correct_answer} 
+            onNext={props.onNext}
+          />
+        ))
+      }
+      <AnswerItem 
+        title={props.triviaData.correct_answer} 
+        currectAnswer={props.triviaData.correct_answer}
+        onNext={props.onNext}
+      />
     </View>
   )
 }

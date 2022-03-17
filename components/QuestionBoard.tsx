@@ -2,13 +2,21 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react';
 import {  FontAwesome } from '@expo/vector-icons';
 
-const QuestionBoard = () => {
+export type QuestionBoardProps = {
+  question: string;
+  currentQuestion: number;
+  totalQuestions: number;
+}
+
+const QuestionBoard = (props: QuestionBoardProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.numberContainer}>
-        <Text style={styles.number}>2/5</Text>
+        <Text style={styles.number}>{`${props.currentQuestion} / ${props.totalQuestions}`}</Text>
       </View>
-      <Text style={styles.question}>Daniel Radcliffe became a global star in the film industry due to his performance in which film franchise?</Text>
+      <Text style={styles.question}>
+        {props.question}
+      </Text>
       <View style={styles.questionMark}>
       <FontAwesome name="question" size={24} color="#17C3B2" />
       </View>
