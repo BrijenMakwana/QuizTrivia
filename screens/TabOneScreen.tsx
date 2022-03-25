@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {SafeAreaView, StyleSheet, Text } from 'react-native';
+import {SafeAreaView, StyleSheet, Text,View } from 'react-native';
 import AnswerBlock from '../components/AnswerBlock';
 import QuestionBoard from '../components/QuestionBoard';
 
@@ -8,10 +8,10 @@ import QuestionBoard from '../components/QuestionBoard';
 export default function TabOneScreen() {
   const [triviaData,setTriviaData] = useState<any>([
     {
-      question: "loading",
-      correct_answer: "Loading",
+      question: "",
+      correct_answer: "",
       incorrect_answers:[
-        "Loading","Loading","Loading"
+        "","",""
       ]
   }
   ]);
@@ -45,21 +45,24 @@ export default function TabOneScreen() {
 
   useEffect(() => {
     getQuestions();
+    console.log(triviaData)
   }, [])
   
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.score}>Score: <Text style={styles.scoreNumber}>{score}</Text></Text>
-      <QuestionBoard 
-        question={triviaData[currentQuestion].question}
-        currentQuestion={currentQuestion + 1}
-        totalQuestions={triviaData.length}
-      />
-      <AnswerBlock 
-        triviaData={triviaData[currentQuestion]}
-        onNext={nextQuestion}
-        scoreIncrement={()=>setScore(score + 1)}
-      /> 
+      <View>
+        <QuestionBoard 
+          question={triviaData[currentQuestion].question}
+          currentQuestion={currentQuestion + 1}
+          totalQuestions={triviaData.length}
+        />
+        <AnswerBlock 
+          triviaData={triviaData[currentQuestion]}
+          onNext={nextQuestion}
+          scoreIncrement={()=>setScore(score + 1)}
+        /> 
+       </View>
     </SafeAreaView>
   );
 }

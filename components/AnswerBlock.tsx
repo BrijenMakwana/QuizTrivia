@@ -1,17 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import AnswerItem from './AnswerItem';
 
 export type AnswerBlockProps = {
   triviaData:{
     correct_answer: string;
-    incorrect_answers:[string];
+    incorrect_answers: string[];
   }
   onNext: () => void;
   scoreIncrement: () => void;
 }
 const AnswerBlock = (props: AnswerBlockProps) => {
-
   return (
     <View style={styles.container}>
       {
