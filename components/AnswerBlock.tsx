@@ -8,6 +8,7 @@ export type AnswerBlockProps = {
     incorrect_answers:[string];
   }
   onNext: () => void;
+  scoreIncrement: () => void;
 }
 const AnswerBlock = (props: AnswerBlockProps) => {
 
@@ -20,6 +21,7 @@ const AnswerBlock = (props: AnswerBlockProps) => {
             key={index} 
             currectAnswer={props.triviaData.correct_answer} 
             onNext={props.onNext}
+            scoreIncrement={props.scoreIncrement}
           />
         ))
       }
@@ -27,6 +29,7 @@ const AnswerBlock = (props: AnswerBlockProps) => {
         title={props.triviaData.correct_answer} 
         currectAnswer={props.triviaData.correct_answer}
         onNext={props.onNext}
+        scoreIncrement={props.scoreIncrement}
       />
     </View>
   )

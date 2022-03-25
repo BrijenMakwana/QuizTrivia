@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignSelf: "center",
     borderRadius: 15,
-    marginTop: 50
+    marginTop: 15
   },
   question:{
     fontSize: 18,

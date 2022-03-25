@@ -1,21 +1,42 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react';
+import React, { useState } from 'react';
 
 export type AnswerItemProps = {
   title: string;
   currectAnswer: string;
   onNext: () => void;
+  scoreIncrement: () => void;
 }
 
 const AnswerItem = (props: AnswerItemProps) => {
+  const [answerBlockColor,setAnswerBlockColor] = useState("#fff");
+  const [answerTextColor,setAnswerTextColor] = useState("#17C3B2");
 
   const revealAnswer = () => {
-    alert(`${props.title === props.currectAnswer}`);
-    props.onNext()
+    if(props.title === props.currectAnswer){
+      setAnswerBlockColor("#17C3B2");
+      setAnswerTextColor("#fff");
+      props.scoreIncrement();
+    }
+    else{
+      setAnswerBlockColor("#FE6D73");
+      setAnswerTextColor("#fff");
+    }
+    
+    setTimeout(() => {
+      props.onNext();
+      setAnswerBlockColor("#fff");
+      setAnswerTextColor("#17C3B2");
+    }, 1000);
+    
   }
   return (
-    <Pressable style={styles.container} onPress={revealAnswer}>
-      <Text style={styles.title}>{props.title}</Text>
+    <Pressable style={[styles.container,{
+      backgroundColor: answerBlockColor
+    }]} onPress={revealAnswer}>
+      <Text style={[styles.title,{
+        color: answerTextColor
+      }]}>{props.title}</Text>
     </Pressable>
   )
 }
@@ -26,7 +47,6 @@ const styles = StyleSheet.create({
   container:{
     width: "80%",
     alignSelf: "center",
-    backgroundColor: "#fff",
     padding: 15,
     borderRadius: 10,
     borderWidth: 0.5,
@@ -43,7 +63,6 @@ const styles = StyleSheet.create({
     }
   },
   title:{
-    color: "#17C3B2",
     fontSize: 18,
     fontWeight: "700"
   }

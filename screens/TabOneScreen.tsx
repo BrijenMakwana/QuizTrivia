@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {SafeAreaView, StyleSheet } from 'react-native';
+import {SafeAreaView, StyleSheet, Text } from 'react-native';
 import AnswerBlock from '../components/AnswerBlock';
 import QuestionBoard from '../components/QuestionBoard';
 
@@ -16,6 +16,7 @@ export default function TabOneScreen() {
   }
   ]);
   const [currentQuestion,setCurrentQuestion] = useState<number>(0);
+  const [score,setScore] = useState<number>(0);
 
   const getQuestions = async() => {
      await axios.get('https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple')
@@ -48,6 +49,7 @@ export default function TabOneScreen() {
   
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.score}>Score: <Text style={styles.scoreNumber}>{score}</Text></Text>
       <QuestionBoard 
         question={triviaData[currentQuestion].question}
         currentQuestion={currentQuestion + 1}
@@ -56,6 +58,7 @@ export default function TabOneScreen() {
       <AnswerBlock 
         triviaData={triviaData[currentQuestion]}
         onNext={nextQuestion}
+        scoreIncrement={()=>setScore(score + 1)}
       /> 
     </SafeAreaView>
   );
@@ -64,8 +67,19 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
-
+    backgroundColor: "#fff",
+    // justifyContent: "space-between"
   },
+  score:{
+    fontSize: 20,
+    marginLeft: 30,
+    marginTop: 5,
+    color: "#000",
+    fontWeight: "bold"
+  },
+  scoreNumber:{
+    fontSize: 25,
+    color: "#17C3B2"
+  }
   
 });
